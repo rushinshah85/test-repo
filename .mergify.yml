@@ -4,8 +4,10 @@ queue_rules:
       - label=hotfix
     merge_conditions:
       - "#approved-reviews-by>=2"
-     
+
   - name: default
+    queue_conditions:
+      - label=default
     merge_conditions:
       - "approved-reviews-by>=2"
 
