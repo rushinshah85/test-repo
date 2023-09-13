@@ -1,6 +1,6 @@
 Test
 Test Queue
 One more dummy commit
-Test
 New Test
+Testing squash mode
 ...
