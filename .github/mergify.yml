@@ -1,0 +1,16 @@
+queue_rules:
+  - name: hotfix
+    queue_conditions:
+      - label=hotfix
+
+  - name: default
+    merge_conditions:
+      - "approved-reviews-by>=1"
+
+pull_request_rules:
+  - name: merge using the merge queue
+    conditions:
+      - base=main
+      - label=queue
+    actions:
+      queue:
