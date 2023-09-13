@@ -1,5 +1,2 @@
-Test
 Test Queue
-One more dummy commit
-New Test
 Testing squash mode
