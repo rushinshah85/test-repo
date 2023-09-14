@@ -12,6 +12,7 @@ pull_request_rules:
   - name: merge using the merge queue
     conditions:
       - base=main
+      - label=queue
     actions:
       queue:
       merge:
