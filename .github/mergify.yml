@@ -2,17 +2,18 @@ queue_rules:
   - name: hotfix
     queue_conditions:
       - label=hotfix
+    merge_method: squash
 
   - name: default
     merge_conditions:
       - "approved-reviews-by>=1"
+    merge_method: squash
     
 
 pull_request_rules:
   - name: merge using the merge queue
     conditions:
       - base=main
-      - label=queue
     actions:
       queue:
       merge:
