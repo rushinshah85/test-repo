@@ -5,3 +5,4 @@ Testing
 Fix of squash mode
 Stop auto-queue and squash
 New PR
+Check status
