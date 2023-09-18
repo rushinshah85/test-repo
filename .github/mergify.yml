@@ -2,9 +2,12 @@ queue_rules:
   - name: hotfix
     queue_conditions:
       - label=hotfix
+      - check-success=default
     merge_method: squash
 
   - name: default
+    queue_conditions:
+      - check-success=default
     merge_conditions:
       - "approved-reviews-by>=1"
     merge_method: squash
