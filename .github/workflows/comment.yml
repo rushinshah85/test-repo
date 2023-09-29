@@ -19,6 +19,7 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           COMMENT_TEXT: 'rushins-test'
+          GH_TOKEN: ${{ github.token }}
         run: |
           echo "Posting comment..."
           echo "$COMMENT_TEXT"
