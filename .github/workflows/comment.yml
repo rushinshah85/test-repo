@@ -1,9 +1,10 @@
-name: Comment "rushins-test" on Draft PR by rushinshah85
+name: Comment "rushins-test" on Draft PR
 
 on:
   pull_request:
     types:
       - opened
+      - synchronize
 
 jobs:
   comment:
@@ -15,17 +16,16 @@ jobs:
 
       - name: Comment on Draft PR by "rushinshah85"
         if: ${{ github.event.pull_request.draft == true && github.event.pull_request.user.login == 'rushinshah85' }}
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prNumber = context.payload.pull_request.number;
-            const comment = 'rushins-test';
-            const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
+        run: |
+          prNumber="${{ github.event.pull_request.number }}"
+          comment="rushins-test"
 
-            await octokit.issues.createComment({
-              repo: context.repo.repo,
-              owner: context.repo.owner,
-              issue_number: prNumber,
-              body: comment
-            });
+          echo "::set-env name=prNumber::$prNumber"
+          echo "::set-env name=comment::$comment"
+
+      - name: Post Comment
+        if: env.prNumber && env.comment
+        run: |
+          echo "Posting comment..."
+          echo "$env.comment"
+          gh pr comment $env.prNumber -b "$env.comment"
