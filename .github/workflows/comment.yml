@@ -14,18 +14,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Comment on Draft PR by "rushinshah85"
+      - name: Comment on Draft PR by "rushins"
         if: ${{ github.event.pull_request.draft == true && github.event.pull_request.user.login == 'rushinshah85' }}
-        run: |
-          prNumber="${{ github.event.pull_request.number }}"
-          comment="rushins-test"
-
-          echo "::set-env name=prNumber::$prNumber"
-          echo "::set-env name=comment::$comment"
-
-      - name: Post Comment
-        if: env.prNumber && env.comment
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          COMMENT_TEXT: 'rushins-test'
         run: |
           echo "Posting comment..."
-          echo "$env.comment"
-          gh pr comment $env.prNumber -b "$env.comment"
+          echo "$COMMENT_TEXT"
+          gh pr comment $PR_NUMBER -b "$COMMENT_TEXT"
