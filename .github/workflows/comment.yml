@@ -1,0 +1,31 @@
+name: Comment "rushins-test" on Draft PR by rushinshah85
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Comment on Draft PR by "rushinshah85"
+        if: ${{ github.event.pull_request.draft == true && github.event.pull_request.user.login == 'rushinshah85' }}
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const comment = 'rushins-test';
+            const octokit = new github.GitHub(process.env.GITHUB_TOKEN);
+
+            await octokit.issues.createComment({
+              repo: context.repo.repo,
+              owner: context.repo.owner,
+              issue_number: prNumber,
+              body: comment
+            });
