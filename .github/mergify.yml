@@ -6,6 +6,7 @@ queue_rules:
     merge_method: squash
 
   - name: default
+    branch_protection_injection_mode: merge
     queue_conditions:
       - check-success=default
     merge_conditions:
