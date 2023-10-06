@@ -7,8 +7,6 @@ queue_rules:
 
   - name: default
     branch_protection_injection_mode: merge
-    queue_conditions:
-      - check-success=default
     merge_conditions:
       - "approved-reviews-by>=1"
     merge_method: squash
