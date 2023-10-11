@@ -7,9 +7,8 @@ queue_rules:
 
   - name: default
     branch_protection_injection_mode: merge
-    queue_conditions:
-      - or:
-        - schedule=Mon-Fri 00:08-7:00[America/Los_Angeles]
+    merge_conditions:
+      - schedule=Mon-Fri 00:13-7:00[America/Los_Angeles]
     merge_method: squash
     
 
