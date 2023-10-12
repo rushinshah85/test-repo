@@ -10,3 +10,13 @@ queue_rules:
     queue_conditions:
       - schedule=21:50-23:59[America/Los_Angeles]
     merge_method: squash
+
+pull_request_rules:
+  - name: merge using the merge queue
+    conditions:
+      - base=main
+      - label=queue
+    actions:
+      queue:
+      merge:
+        method: squash
