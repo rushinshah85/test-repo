@@ -9,6 +9,7 @@ queue_rules:
     branch_protection_injection_mode: merge
     queue_conditions:
       - schedule=21:50-23:59[America/Los_Angeles]
+      - branch-protection-review-decision=APPROVED
     merge_method: squash
 
 pull_request_rules:
