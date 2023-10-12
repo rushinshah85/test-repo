@@ -8,4 +8,4 @@ New PR
 Check status
 Test
 Test2
-Test schedule without pull_request_rules
+Next check
