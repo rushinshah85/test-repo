@@ -7,10 +7,10 @@ queue_rules:
 
   - name: default
     branch_protection_injection_mode: merge
-    queue_conditions:
-      - schedule=21:50-23:59[America/Los_Angeles]
-      - branch-protection-review-decision=APPROVED
     merge_method: squash
+    commit_message_template: |
+      {{ title }} {{ number }}
+      {{ body | get_section("## Commit Message") }}
 
 pull_request_rules:
   - name: merge using the merge queue
