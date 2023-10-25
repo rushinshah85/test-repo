@@ -13,6 +13,6 @@ _How does the change address the issue/feature?_
 - T3. cs1 tests "test cs1 TRAIN_NAME=<train_name> SYSTEM=<system_name>" or use "cb_cli test-please cs1 --help" for more options
 - T4. Other tests performed. Provide enough detail that they can be replicated by other developers with relevant logs.
 
-### Commit Message
+### Commit-Message
 _Add commit message here_
 Jira issue: SW-XXXXXX
