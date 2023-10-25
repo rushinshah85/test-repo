@@ -9,7 +9,7 @@ queue_rules:
     branch_protection_injection_mode: merge
     merge_method: squash
     commit_message_template: |
-      {{ title }} {{ number }}
+      {{ title }} (#{{ number }})
       {% if '### Commit_Message' in body %}
         {{ body | get_section("### Commit_Message") }}
       {% endif %}
