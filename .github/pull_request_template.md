@@ -15,5 +15,4 @@ _How does the change address the issue/feature?_
 
 ### Commit Message
 _Add commit message here_
-<br>
 Jira issue: SW-XXXXXX
