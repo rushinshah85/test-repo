@@ -11,3 +11,4 @@ Test2
 Next check
 Test Again
 With commit message
+Empty commit message
