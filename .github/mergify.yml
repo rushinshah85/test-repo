@@ -11,10 +11,7 @@ queue_rules:
     commit_message_template: |
       {{ title }} (#{{ number }})
       {% if '### Commit-Message' in body %}
-        True
         {{ body | get_section("### Commit-Message") }}
-      {% else %}
-        False
       {% endif %}
 
 
