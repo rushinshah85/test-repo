@@ -10,9 +10,9 @@ queue_rules:
     merge_method: squash
     commit_message_template: |
       {{ title }} (#{{ number }})
-      {% if '### Commit_Message' in body %}
+      {% if '### Commit-Message' in body %}
         True
-        {{ body | get_section("### Commit_Message") }}
+        {{ body | get_section("### Commit-Message") }}
       {% else %}
         False
       {% endif %}
