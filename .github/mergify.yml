@@ -11,8 +11,7 @@ queue_rules:
     commit_message_template: |
       {{ title }} (#{{ number }})
       {% if '### Commit_Message' in body %}
-        {% set commit_message = body|get_section('### Commit_Message') %}
-        {{ commit_message.replace('_Add commit message here_', '') }}
+        {{ body|get_section('### Commit_Message')|replace('_Add commit message here_', '') }}
       {% endif %}
 
 pull_request_rules:
