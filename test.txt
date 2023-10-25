@@ -10,3 +10,4 @@ Test
 Test2
 Next check
 Test Again
+With commit message
