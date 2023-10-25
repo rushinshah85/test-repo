@@ -10,4 +10,3 @@ Test
 Test2
 Next check
 Test Again
-Test without section
