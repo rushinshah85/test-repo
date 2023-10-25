@@ -12,8 +12,7 @@ queue_rules:
       {{ title }} (#{{ number }})
       {% if '### Commit_Message' in body %}
         {% set commit_message = body|get_section('### Commit_Message') %}
-        {% set cleaned_message = commit_message.replace('_Add commit message here_', '') %}
-        {{ cleaned_message }}
+        {{ commit_message.replace('_Add commit message here_', '') }}
       {% endif %}
 
 pull_request_rules:
