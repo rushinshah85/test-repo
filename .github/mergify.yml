@@ -11,12 +11,12 @@ queue_rules:
     commit_message_template: |
       {{ title }} (#{{ number }})
       {% if '### Commit-Message' in body %}
-        {{ body | get_section('### Commit-Message') | replace('_Add commit message here_', '') }}
+        {{ body }}
       {% endif %}
 
 pull_request_rules:
   - name: merge using the merge queue
-    conditions:
+    conditions
       - base=main
       - label=queue
     actions:
