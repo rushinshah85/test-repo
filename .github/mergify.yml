@@ -22,9 +22,9 @@ queue_rules:
           )
       }}      
       {% if 'Dump-All-Commits: Yes' in body %}
-        Following is the information of all the commits in this PR.
+      Following is the information of all the commits in this PR.
         {% for commit in commits %}
-          * {{ commit.commit_message }}
+        * {{ commit.commit_message }}
         {% endfor %}
       {% endif %}
 pull_request_rules:
