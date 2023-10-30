@@ -10,8 +10,13 @@ queue_rules:
     merge_method: squash
     commit_message_template: |
       {{ title }} (#{{ number }})
-      {{ body | replace('_Why do we need this change? (Remove if not applicable)_', 'N/A') | replace('_Description of the change (Remove if not applicable)_', 'N/A') | replace('_Describe any additional testing done (Remove if not applicable)_', 'N/A') }}
-
+      {{ body | replace('_Why do we need this change? (Remove if not applicable)_', 'N/A') | replace('_Description of the change (Remove if not applicable)_', 'N/A') | replace('_Describe any additional testing done (Remove if not applicable)_', 'N/A') | replace('dump-all-commits', '') }}
+      {% if 'dump-all-commits' in body %}
+        Following is the information of all the commits in this PR.
+        {% for commit in commits %}
+          * {{ commit.commit_message }}
+        {% endfor %}
+      {% endif %}
 pull_request_rules:
   - name: merge using the merge queue
     conditions:
