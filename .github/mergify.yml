@@ -17,8 +17,12 @@ queue_rules:
           '_Description of the change (Remove if not applicable)_', 'N/A'
           ) | replace(
           '_Describe any additional testing done (Remove if not applicable)_', 'N/A'
+          ) | replace(          
+          'Dump-All-Commits: No', ''
+          ) | replace(          
+          'Dump-All-Commits: Yes', ''
           ) | replace(
-          'Dump-All-Commits: No (Change to Yes if you want to dump commit-messages of all commits)', ''
+          '_(Change to Yes if you want to dump commit-messages of all commits)_', ''
           ) | trim
       }}      
       {% if 'Dump-All-Commits: Yes' in body %}
