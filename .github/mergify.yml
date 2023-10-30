@@ -19,7 +19,7 @@ queue_rules:
           '_Describe any additional testing done (Remove if not applicable)_', 'N/A'
           ) | replace(
           'Dump-All-Commits: No (Change to Yes if you want to dump commit-messages of all commits)', ''
-          )
+          ) | trim
       }}      
       {% if 'Dump-All-Commits: Yes' in body %}
       Following is the information of all the commits in this PR.
