@@ -10,9 +10,7 @@ queue_rules:
     merge_method: squash
     commit_message_template: |
       {{ title }} (#{{ number }})
-      {% if '### Commit-Message' in body %}
-        {{ body | replace(body | get_section('### Changes'), '') }}
-      {% endif %}
+      {{ body | replace('_Why do we need this change? (Remove if not applicable)_', 'N/A') | replace('_Description of the change (Remove if not applicable)_', 'N/A') | replace('_Describe any additional testing done (Remove if not applicable)_', 'N/A') }}
 
 pull_request_rules:
   - name: merge using the merge queue
