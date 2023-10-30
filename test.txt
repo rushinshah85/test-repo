@@ -15,3 +15,4 @@ Empty commit message
 Trying...
 Again.. 
 Let's see
+Added trim
