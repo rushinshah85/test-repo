@@ -2,27 +2,27 @@ shared:
   git_commit_template: &git_commit_template
     |
     {{ title }} (#{{ number }})
-      {{
-        body | replace(
-          '_Why do we need this change? (Remove if not applicable)_', 'N/A'
-          ) | replace(
-          '_Description of the change (Remove if not applicable)_', 'N/A'
-          ) | replace(
-          '_Describe any additional testing done (Remove if not applicable)_', 'N/A'
-          ) | replace(          
-          'Dump-All-Commits: No', ''
-          ) | replace(          
-          'Dump-All-Commits: Yes', ''
-          ) | replace(
-          '_(Change to Yes if you want to dump commit-messages of all commits)_', ''
-          ) | trim
-      }}      
-      {% if 'Dump-All-Commits: Yes' in body %}
-      Following is the information of all the commits in this PR.
-        {% for commit in commits %}
-      * {{ commit.commit_message }}
-        {% endfor %}
-      {% endif %}
+    {{
+      body | replace(
+        '_Why do we need this change? (Remove if not applicable)_', 'N/A'
+        ) | replace(
+        '_Description of the change (Remove if not applicable)_', 'N/A'
+        ) | replace(
+        '_Describe any additional testing done (Remove if not applicable)_', 'N/A'
+        ) | replace(          
+        'Dump-All-Commits: No', ''
+        ) | replace(          
+        'Dump-All-Commits: Yes', ''
+        ) | replace(
+        '_(Change to Yes if you want to dump commit-messages of all commits)_', ''
+        ) | trim
+    }}      
+    {% if 'Dump-All-Commits: Yes' in body %}
+    Following is the information of all the commits in this PR.
+      {% for commit in commits %}
+    * {{ commit.commit_message }}
+      {% endfor %}
+    {% endif %}
 
 queue_rules:
   - name: hotfix
