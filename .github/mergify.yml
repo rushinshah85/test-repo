@@ -1,15 +1,7 @@
-queue_rules:
-  - name: hotfix
-    queue_conditions:
-      - label=hotfix
-      - check-success=default
-    merge_method: squash
-
-  - name: default
-    branch_protection_injection_mode: merge
-    merge_method: squash
-    commit_message_template: |
-      {{ title }} (#{{ number }})
+shared:
+  git_commit_template: &git_commit_template
+    |
+    {{ title }} (#{{ number }})
       {{
         body | replace(
           '_Why do we need this change? (Remove if not applicable)_', 'N/A'
@@ -28,9 +20,23 @@ queue_rules:
       {% if 'Dump-All-Commits: Yes' in body %}
       Following is the information of all the commits in this PR.
         {% for commit in commits %}
-        * {{ commit.commit_message }}
+      * {{ commit.commit_message }}
         {% endfor %}
       {% endif %}
+
+queue_rules:
+  - name: hotfix
+    queue_conditions:
+      - label=hotfix
+      - check-success=default
+    merge_method: squash
+
+  - name: default
+    branch_protection_injection_mode: merge
+    merge_method: squash
+    commit_message_template: *git_commit_template
+    
+
 pull_request_rules:
   - name: merge using the merge queue
     conditions:
