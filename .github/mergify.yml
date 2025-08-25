@@ -1,6 +1,5 @@
 shared:
-  git_commit_template: &git_commit_template
-    |
+  git_commit_template: &git_commit_template |
     {{ title }} (#{{ number }})
     {{
       body | replace(
@@ -35,8 +34,6 @@ queue_rules:
     branch_protection_injection_mode: merge
     merge_method: squash
     commit_message_template: *git_commit_template
-    
-
 pull_request_rules:
   - name: merge using the merge queue
     conditions:
@@ -46,3 +43,9 @@ pull_request_rules:
       queue:
       merge:
         method: squash
+priority_rules:
+  - name: priority for queue `hotfix`
+    conditions:
+      - label=hotfix
+      - check-success=default
+    priority: 2250
