@@ -49,9 +49,10 @@ pull_request_rules:
 
   - name: automatically merge PRs that meet the criteria for inference branches
     conditions:
-      - base~=^ma*
+      - base~=^rushin*
       - branch-protection-review-decision=APPROVED
     actions:
       merge:
         method: squash
         commit_message_template: *git_commit_template
+
