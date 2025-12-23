@@ -51,9 +51,11 @@ pull_request_rules:
     conditions:
       - base~=^rushin*
       - branch-protection-review-decision=APPROVED
+      - label=queue
     actions:
       queue:
       merge:
         method: squash
         commit_message_template: *git_commit_template
+
 
