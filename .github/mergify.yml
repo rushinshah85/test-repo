@@ -52,6 +52,7 @@ pull_request_rules:
       - base~=^rushin*
       - branch-protection-review-decision=APPROVED
     actions:
+      queue:
       merge:
         method: squash
         commit_message_template: *git_commit_template
