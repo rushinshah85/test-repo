@@ -1,0 +1,35 @@
+name: slack-relay
+
+# Relays a Slack DM on behalf of an egress-restricted host.
+# Triggered via the GitHub API (repository_dispatch), which the airgapped
+# box CAN reach, while this runner has full internet to call Slack.
+#
+# Setup:
+#   - Add repo secret SLACK_BOT_TOKEN (xoxb-..., scopes: users:read.email, chat:write)
+#   - This file must live on the default branch for repository_dispatch to fire.
+
+on:
+  repository_dispatch:
+    types: [slack-notify]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack DM
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          EMAIL: ${{ github.event.client_payload.email || 'rushin.shah@cerebras.net' }}
+          TEXT: ${{ github.event.client_payload.text || 'Test message via GitHub relay' }}
+        run: |
+          set -euo pipefail
+          uid=$(curl -sS -G https://slack.com/api/users.lookupByEmail \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            --data-urlencode "email=$EMAIL" \
+            | jq -er '.user.id // ("lookup failed: " + (.error // "unknown") | halt_error(1))')
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -n --arg c "$uid" --arg t "$TEXT" '{channel:$c, text:$t}')" \
+            | jq -e '.ok or ("post failed: " + (.error // "unknown") | halt_error(1))' >/dev/null
+          echo "Slack DM sent to $EMAIL"
